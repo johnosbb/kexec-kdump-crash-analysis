@@ -1,0 +1,13 @@
+[Unit]
+Description=Setup kexec environment for simple-kdump
+After=local-fs.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/conf.d/simple-kdump.conf
+RemainAfterExit=true
+ExecStart=/usr/bin/kexec -p $KERNEL --initrd $INITRAMFS --append "${BOOT_OPTIONS} nr_cpus=1 reset_devices systemd.unit=emergency-kdump.target"
+ExecStop=/usr/bin/kexec -p -u
+
+[Install]
+WantedBy=multi-user.target

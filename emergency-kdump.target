@@ -1,0 +1,5 @@
+[Unit]
+Description=Emergency mode for simple-kdump
+Requires=emergency.target simple-kdump-collect.service
+After=emergency.target simple-kdump-collect.service
+AllowIsolate=yes

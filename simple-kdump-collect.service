@@ -1,0 +1,9 @@
+[Unit]
+Description=Collect the vmcore for simple-kdump
+DefaultDependencies=no
+
+[Service]
+Type=idle
+ExecStart=/bin/sh -c 'mkdir -p /var/crash/ && /usr/bin/makedumpfile -z -d 31 /proc/vmcore "/var/crash/crashdump-$$(date +%%F-%%T)"'
+ExecStopPost=reboot
+UMask=0077
