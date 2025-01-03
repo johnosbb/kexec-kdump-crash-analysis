@@ -20,6 +20,12 @@ Install from [AUR](https://aur.archlinux.org/packages/simple-kdump)
   Note the kernel doesn't need to match the kernel you want to debug.
   So choose your favorite/smallest/whatever kernel and its initramfs.
 
+  Some kernel configs must be enabled, fortunately `linux` and `linux-lts` all
+  have the options enabled for x86_64 Archlinux.
+
+  For ArchlinuxARM `linux-aarch64` kernels, `CONFIG_CRASH_DUMP=y` and
+  `CONFIG_PROC_VMCORE=y` options are needed, and the PR is already submitted.
+
   And just use the regular boot option without `crashkernel=` option.
 
 - Add `crashkernel=` option to boot entry and reboot
@@ -63,7 +69,8 @@ Archlinux, and also why it's so hard to implement kdump.
 So I just come up with the super simple setup.
 
 The core of the simplicity comes from letting user to choose whatever kernel/initramfs
-combination as the kexec kernel/initramfs, as long as the combination can boot.
+combination as the kexec kernel/initramfs, not reusing the current kernel/initramfs,
+as long as the combination can boot and have needed options enabled.
 
 This avoids two complex workload:
 
