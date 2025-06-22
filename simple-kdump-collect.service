@@ -4,6 +4,6 @@ DefaultDependencies=no
 
 [Service]
 Type=idle
-ExecStart=/bin/sh -c 'dumpdir=$$(date "+%%F-%%T") && mkdir -p "/var/crash/$dumpdir" && /usr/bin/makedumpfile -z -d 31 /proc/vmcore "/var/crash/$dumpdir/vmcore.kdump" && /usr/bin/makedumpfile --dump-dmesg /proc/vmcore "/var/crash/$dumpdir/vmcore-dmesg.log"'
-ExecStopPost=reboot
+ExecStart=/bin/sh -c 'dumpdir=$$(date "+%%F-%%T") && mkdir -p "/var/crash/$dumpdir" && /usr/bin/makedumpfile -d 31 /proc/vmcore "/var/crash/$dumpdir/vmcore.kdump" && /usr/bin/makedumpfile --dump-dmesg /proc/vmcore "/var/crash/$dumpdir/vmcore-dmesg.log"'
+ExecStopPost=/usr/bin/systemctl --force reboot # Use systemctl reboot
 UMask=0077
