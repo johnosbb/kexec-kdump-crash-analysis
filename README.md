@@ -2,6 +2,9 @@
 
 Kernel Crash Analysis on Arch Linux
 
+![image](https://github.com/user-attachments/assets/1e8a72e0-1d2a-4ed3-a514-a4a695fb3fe6)
+
+
 ## Introduction
 Kexec and Kdump are mechanisms available in the Linux kernel to capture and recover the kernel memory snapshot (/proc/vmcore) after a kernel panic. They can do this without requiring a full system reboot and this enables the preservation and retrieval of the system kernel’s memory image. This saved image can later be used for detailed post-mortem analysis to diagnose the cause of the crash.
 
@@ -185,6 +188,8 @@ ExecStopPost=/usr/bin/systemctl --force reboot # Use systemctl reboot
 UMask=0077
 ```
 
+![image](https://github.com/user-attachments/assets/92163276-f86e-4a04-932f-d39eeeeeaebe)
+
 ## kexec and kdump capture process
 The second service is /etc/systemd/system/simple-kdump-setup.service
 
@@ -249,14 +254,18 @@ We can crash the kernel with:
 echo c | sudo tee /proc/sysrq-trigger
 ```
 
+![image](https://github.com/user-attachments/assets/1dd3b92e-c5c0-4a02-9259-e41eb6b37cf2)
 
 
 Following the crash we will boot to the crash kernel as shown above.
 
+![image](https://github.com/user-attachments/assets/042e020d-f0a3-4d5b-a619-257e4d68645b)
 
 vmcore kdump file created
 If we look in ```/var/crash``` we should find our vmcore.kdump file (shown above).
 
+
+![image](https://github.com/user-attachments/assets/ecfe7d37-645f-474f-978a-cc444f7aa89d)
 
 ## Crash Utility
 vmlinux is the uncompressed, ELF-format (Executable and Linkable Format) file containing the entire Linux kernel, including: all compiled kernel code and symbol tables. It is essential when debugging kernel panics or oopses. In this example I have placed a copy of mine in /boot/vmlinuz-6.9.0-debug.
