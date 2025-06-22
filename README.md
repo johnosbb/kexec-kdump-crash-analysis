@@ -1,4 +1,4 @@
-simple-kdump
+Kexec/KDump Crash Analysis
 ============
 
 About
